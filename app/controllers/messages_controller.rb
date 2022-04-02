@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: %i[ show edit update destroy ]
+  
 
   # GET /messages or /messages.json
   def index
@@ -64,6 +65,25 @@ class MessagesController < ApplicationController
     end
   end
 
+  def like
+    #grabb info the post 
+    @post =  Message.all.find(params[:id])
+    @datas = Like.create(user_id: current_user.id, message_id: @post.id)
+    respond_to do |format|
+      if @datas.save
+          format.html { redirect_to root_path, notice: "Like successfully added." }
+        else
+          puts  @datas.errors.full_messages
+      end
+    end
+  end
+
+  def unlike
+    #grabb info the post and then delete the post 
+    @deletepost =  Message.all.find(params[:id])
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_message
@@ -75,4 +95,5 @@ class MessagesController < ApplicationController
       params.require(:message).permit(:title, :caption, :image)
     end
 
+  
 end

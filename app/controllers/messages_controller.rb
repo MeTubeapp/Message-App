@@ -4,6 +4,14 @@ class MessagesController < ApplicationController
   # GET /messages or /messages.json
   def index
     @messages = Message.all
+      if unless current_user['name'].to_s.strip.empty?
+        @div_class = :"text-center"
+        @div_content = "Login as "+current_user['name']
+      else
+        @div_class = :"text-center"
+        @div_content = 'Username Unknown'
+      end
+    end
   end
 
   # GET /messages/1 or /messages/1.json
@@ -66,4 +74,5 @@ class MessagesController < ApplicationController
     def message_params
       params.require(:message).permit(:title, :caption, :image)
     end
+
 end

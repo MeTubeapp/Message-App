@@ -1,0 +1,21 @@
+<p>
+  <strong>Title:</strong>
+  <%= @message.title %>
+</p>
+
+<p>
+  <strong>Caption:</strong>
+  <%= @message.caption %>
+</p>
+
+<div class="width:400px;">
+	<%= link_to image_tag(@message.image, style:"width:100px") if @message.image.attached? %>
+</div>
+
+<p>
+  <strong>User:</strong>
+  <%= @message.user.email if @message.user.email? %>
+</p>
+
+<%= link_to 'Edit', edit_message_path(@message) %> |
+<%= link_to 'Back', messages_path %>

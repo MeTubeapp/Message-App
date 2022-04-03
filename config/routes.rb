@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
-  put '/messages/:id/like', to: 'messages#like', as: 'like'
-  delete '/messages/:id/unlike', to: 'messages#unlike', as: 'unlike'
+  put '/messages/:id/like', to: 'likes#create', as: 'like'
+  delete '/messages/:id/unlike', to: 'likes#destroy', as: 'unlike'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

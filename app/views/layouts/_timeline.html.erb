@@ -22,25 +22,27 @@
             <hr>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex flex-row muted-color"> 
-                  <% if current_user['email'] == message['email']%>
+                  <% if current_user['name'] == message.user['name'] %>
                       <span><%= link_to 'Edit', edit_message_path(message) %></span> 
                       <span class="ml-2">
                         <%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %>
                       </span> 
+                      <span class="ml-2"><%= link_to 'Show', message %></span>                      
                   <% else %>
                       <span><%= link_to 'Edit', edit_message_path(message), disabled: true %></span> 
                       <span class="ml-2">
                         <%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' }, disabled: true %>
                       </span> 
+                      <span class="ml-2"><%= link_to 'Show', message %></span>
                   <% end %>
                 </div>
                 <span class="d-flex align-items-right">
                   <% if user_signed_in? %>
-                     <% if message.liked?(current_user) %>
-                         <span><%= button_to "Like", like_path(message), method: "put", disabled:true %></span>
-                      <% else %>
-                         <span><%= button_to "Like", like_path(message), method: "put" %></span>
-                      <% end %>
+                    <% if message.liked?(current_user) %>
+                        <span><%= button_to "Unlike", unlike_path(message), method: :delete %></span>
+                    <% else %>
+                        <span><%= button_to "Like", like_path(message), method: "put" %></span>
+                    <% end %>
                   <% end %>
                </span>
               </div>  
